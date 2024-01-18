@@ -1,0 +1,75 @@
+type Query{
+    job: Job
+    jobs: [Job!]
+    company: Company
+    companies: [Company!]
+}
+
+type Mutation{
+    """Enter job to create new job"""
+    createJob(job:inputJob):Job
+    """Pass id and job object to update the job"""
+    updateJob(jobId:ID!,job:inputJob):Job
+    """Delete job by providing job id"""
+    deleteJob(jobId:ID):Job
+
+    """Create new company"""
+    createCompany(company:inputCompany):Company
+    updateCompany(companyId:ID!,company:inputCompany):Company
+    deleteCompany(companyId:ID!):Company
+}
+
+
+# jobs 
+type Job{
+    """Uniqu id"""
+    id: ID!
+    """Job title here"""
+    title: String!
+    """Job description here"""
+    description: String
+    """Job creaation date"""    
+    createdAt: String
+    """Job activation"""
+    active: Boolean
+    """Company """
+    company: Company
+}
+
+
+# companies 
+type Company {
+    """Unique id"""
+    id: ID!
+    """Company name"""
+    name: String!
+    """Company description"""
+    description: String
+    """Company activation"""
+    active: Boolean
+    """Company created date"""
+    createdAt: String
+    """jobs"""
+    jobs:[Job!]
+}
+
+
+input inputJob{
+    """Enter job title"""
+    title: String!
+    """Enter job description"""
+    description: String
+    """Enter creaation date"""
+    createdAt: String
+    """Enter company id"""
+    company: ID
+}
+ 
+input inputCompany{
+    """Enter the company name"""
+    name: String!
+    """Enter company description"""
+    description: String
+    """company creaation date"""
+    createdAt: String
+}
