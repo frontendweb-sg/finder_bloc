@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mobile/core/errors/failure.dart';
 import 'package:mobile/features/jobs/business/entities/job_entity.dart';
 import 'package:mobile/features/jobs/business/repos/job_repo.dart';
@@ -10,18 +11,28 @@ class JobBloc extends Bloc<JobEvent, JobState> {
   final JobRepo _jobRepo;
   JobBloc(this._jobRepo) : super(JobsInitial()) {
     on<GetJobs>(_getJobs);
+    on<AddJob>(_createJob);
   }
 
-  void _getJobs(JobEvent event, Emitter<JobState> emit) async {
+  void _getJobs(GetJobs event, Emitter<JobState> emit) async {
     try {
-      emit(JobsLoading());
+      QueryOptions options = event.options;
 
-      final response = await GetJobUseCase(_jobRepo).call();
-      print('response $response');
+      emit(JobsLoading());
+      final response = await GetJobUseCase(_jobRepo).call(params: options);
       response.fold(
-        (l) => addError(JobFailed(l)),
-        (r) => JobsSuccess([] as List<JobEntity>),
+        (Failure l) => emit(JobFailed(l)),
+        (List<JobEntity> r) => emit(JobsSuccess(r)),
       );
+    } on Failure catch (error) {
+      emit(JobFailed(error));
+    }
+  }
+
+  void _createJob(JobEvent event, Emitter<JobState> emit) async {
+    try {
+      final result =
+          await _jobRepo.createJob(MutationOptions(document: gql('')));
     } on Failure catch (error) {
       emit(JobFailed(error));
     }

@@ -24,4 +24,14 @@ class JobRepoImp extends JobRepo {
       return Left(Failure(message: error.message, statusCode: 400));
     }
   }
+
+  @override
+  FutureResult<JobEntity> createJob(MutationOptions? mutationOptions) async {
+    try {
+      final result = await _jobDatasourceApi.createJob(mutationOptions!);
+      return Right(result);
+    } on GraphQLError catch (error) {
+      return Left(Failure(message: error.message, statusCode: 400));
+    }
+  }
 }

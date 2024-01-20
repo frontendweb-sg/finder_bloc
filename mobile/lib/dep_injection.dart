@@ -9,7 +9,7 @@ import 'package:mobile/features/jobs/presenter/bloc/jobs/jobs_bloc.dart';
 
 final sl = GetIt.instance;
 
-Future<void> initializeDeps() async {
+void initializeDeps() {
   // graphql
   GraphQlConfig graphQlConfig = GraphQlConfig();
 
@@ -18,7 +18,7 @@ Future<void> initializeDeps() async {
   // jobs
   sl.registerSingleton<JobDatasourceApi>(JobDatasourceApi(sl())); // datasource
   sl.registerSingleton<JobRepo>(JobRepoImp(sl())); // repository
-  sl.registerSingleton(GetJobUseCase(sl())); // usecases
+  // sl.registerLazySingleton(() => GetJobUseCase(sl())); // usecases
 
   // jobs bloc
   sl.registerFactory(() => JobBloc(sl()));

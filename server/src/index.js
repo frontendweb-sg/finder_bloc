@@ -9,6 +9,10 @@ import { readFile } from 'node:fs/promises';
 import { resolvers } from './resolvers.js'
 import { errorHandler } from './middleware/error-handler.js';
 import { authRoute } from './routes/auth.js';
+import { userRoute } from './routes/user.js';
+import { auth } from './middleware/auth.js';
+import { AuthError } from './errors/auth-error.js';
+import { Jwt } from './utils/jwt.js';
 
 
 // graphql schema
@@ -26,11 +30,32 @@ app.use(express.static("public"))
 app.use(cors());
 
 app.use("/api/auth", authRoute);
+app.use('/api/user', userRoute);
+
+
+const getContext = ({ req, res }) => {
+    try {
+        const header = req.get('Authorization');
+        if (!header) throw new AuthError("Unauthorized access!");
+        const token = header.split(' ')[1];
+        if (!token) throw new AuthError("Unauthorized access!");
+        const verify = Jwt.verifyToken(token);
+        if (!verify) throw new AuthError("Invalid token!");
+
+        return {
+            token
+        }
+    } catch (error) {
+        //next(error)
+        throw error;
+    }
+}
 // apollo server
 const server = new ApolloServer({ typeDefs, resolvers });
 await server.start();
 
-app.use('/graphql', apolloMiddleware(server));
+
+app.use('/api/graphql', apolloMiddleware(server, { context: getContext }));
 
 app.use(errorHandler);
 // listen

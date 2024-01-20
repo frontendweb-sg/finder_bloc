@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { userSingup, userSignin } from "../controllers/user.js";
+import { userSingup, userSignin } from "../controllers/auth.js";
 import { check, body } from 'express-validator'
 import { User } from "../models/user.js";
 import { requestValidator } from "../middleware/request-validator.js";

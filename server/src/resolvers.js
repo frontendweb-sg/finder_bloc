@@ -4,7 +4,7 @@ import formate from 'date-format';
 export const resolvers = {
     Query: {
         job: async (_, args) => await getJob(args.jobId),
-        jobs: async () => await getJobs(),
+        jobs: async (_, args, context) => await getJobs(),
         company: async (_, args) => await getCompanyById(args.id),
         companies: async () => await getCompanies(),
     },

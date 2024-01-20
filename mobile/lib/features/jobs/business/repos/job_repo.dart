@@ -7,4 +7,5 @@ import 'package:mobile/features/jobs/business/entities/job_entity.dart';
 ///
 abstract class JobRepo {
   FutureResult<List<JobEntity>> getJobs(QueryOptions queryOptions);
+  FutureResult<JobEntity> createJob(MutationOptions mutationOptions);
 }
