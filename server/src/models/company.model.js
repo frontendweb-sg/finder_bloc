@@ -23,23 +23,3 @@ const schema = new Schema({
 });
 
 export const Company = mongoose.model(COMPANY_TABLE, schema);
-
-/**
- * Ignou (noida)
- * about: thisis cmm level company
- * rating: 4.5
- * 
- * jobs:[
- *  {
- *      title: "React developer",
- *      exp: 5 year
- *      salary: 9 to 10 lac
- *      skills: ['html','css','js','react','mongodb'],
- *      location: 'noida',
- *      period: {from: '10-3-2023',to:'10-3-2023'},
- *      isClosed: false
- *      jobType: 'part time',
- *      position: 1
- *  }
- * ]
- */

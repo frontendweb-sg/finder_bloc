@@ -32,11 +32,11 @@ type Mutation {
 
 
      """Enter job to create new job"""
-    createJob(job:inputJob):Job
+    createJob(job:InputJob):Job
     """Pass id and job object to update the job"""
-    updateJob(jobId:ID!,job:inputJob):Job
+    updateJob(job:UpdateJob):Job
     """Delete job by providing job id"""
-    deleteJob(jobId:ID):Job
+    deleteJob(jobId:ID!):Job
 
    
 }
@@ -69,18 +69,30 @@ type Designation{
 
 # jobs type
 type Job{
+    """ Company id """
+    company: String!
     """Uniqu id"""
     id: ID!
     """Job title here"""
     title: String!
     """Job description here"""
     description: String
+    """Job required experience"""
+    experience: Int
+    """Job required skills"""
+    skills: [String]
+    """Job location"""
+    location: String
+    """Job type fulltime, parttime, contract"""
+    jobType: String
+    """Job position, no of opening"""
+    position: Int
+    """Job closed"""
+    isClosed: Boolean
     """Job creaation date"""    
     createdAt: String
     """Job activation"""
     active: Boolean
-    """Company """
-    company: Company
 }
 
 # companies 
@@ -130,15 +142,48 @@ input UpdateDesignation{
 }
 
 # Input job
-input inputJob{
+input InputJob{
+    """Enter company id"""
+    company: ID!
     """Enter job title"""
     title: String!
     """Enter job description"""
     description: String
-    """Enter creaation date"""
-    createdAt: String
-    """Enter company id"""
-    company: ID
+    """Job required experience"""
+    experience: Int
+    """Job required skills"""
+    skills: [String]
+    """Job location"""
+    location: String
+    """Job type fulltime, parttime, contract"""
+    jobType: String
+        """Job position, no of opening"""
+    position: Int
+    """Job closed"""
+    isClosed: Boolean
+}
+
+input UpdateJob{
+    """Job id required for update job"""
+   id:ID!
+   """Enter company id"""
+    company: ID!
+    """Enter job title"""
+    title: String!
+    """Enter job description"""
+    description: String
+    """Job required experience"""
+    experience: Int
+    """Job required skills"""
+    skills: [String]
+    """Job location"""
+    location: String
+    """Job type fulltime, parttime, contract"""
+    jobType: String
+        """Job position, no of opening"""
+    position: Int
+    """Job closed"""
+    isClosed: Boolean
 }
  
  # Input company

@@ -1,5 +1,5 @@
 import { getCompanyById } from "../controllers/company.controller.js"
-import { getJobs, getJob, addJob, updateJob, deleteJob } from "../controllers/job.controller.js"
+import { getJobs, getJob, createJob, updateJob, deleteJob } from "../controllers/job.controller.js"
 import formate from 'date-format';
 
 
@@ -14,7 +14,7 @@ export const JobFieldResolve = {
 }
 
 export const jobMutation = {
-    createJob: async (_, args) => await addJob(args.job),
-    updateJob: async (_, args) => await updateJob(args.jobId, args.job),
-    deleteJob: async (_, args) => await deleteJob(args.jobId),
-}
+    createJob: async (_, { job }) => await createJob(job),
+    updateJob: async (_, { job }) => await updateJob(job),
+    deleteJob: async (_, { jobId }) => await deleteJob(jobId),
+} 

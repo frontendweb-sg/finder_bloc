@@ -8,7 +8,9 @@ export const getJobs = async () => {
         const jobs = await Job.find({});
         return jobs;
     }
-    catch (error) { }
+    catch (error) {
+        throw error;
+    }
 }
 
 
@@ -29,11 +31,15 @@ export const getJob = async (id) => {
 }
 
 /**
- * Add new job
+ * Represent a job
  * @constructor
- * @param {String} title
- * @param {String} description
- * @param {Date} createdAt
+ * @param {String} title -  title of the job
+ * @param {String} description - job description
+ * @param {String} company - company id
+ * @param {String} jobType - typeof job [partime,fulltime,contract]
+ * @param {String} location - job location
+ * @param {[String]} skills - Required skills 
+ * @param {String} experience - Required experience
  * 
  * @returns {
  *  String title,
@@ -41,7 +47,7 @@ export const getJob = async (id) => {
  *  Date createdAt
  * }
  */
-export const addJob = async (job) => {
+export const createJob = async (job) => {
     try {
         const newJob = new Job(job);
         await newJob.save();
@@ -89,7 +95,8 @@ export const updateJob = async (body) => {
 
 /**
  * Delete job by id
- * @param {String} id 
+ * @constructor
+ * @param {String} id - job id
  * @returns {id}
  */
 export const deleteJob = async (id) => {
