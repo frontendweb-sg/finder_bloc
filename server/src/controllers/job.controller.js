@@ -48,42 +48,81 @@ export const addJob = async (job) => {
         return newJob;
     }
     catch (error) {
-
+        throw error;
     }
 }
 
-export const updateJob = async (id, body) => {
+/**
+ * Update job
+ * @constructor
+ * @param {String} id
+ * @param {String} title
+ * @param {String} description
+ * @param {Date} createdAt
+ * 
+ * @returns {
+*  String title,
+*  String description,
+*  Date createdAt
+* }
+ */
+export const updateJob = async (body) => {
     try {
+        const { id, ...rest } = body;
+        const hasJob = await Job.findById(id);
+        if (!hasJob) {
+            throw new GraphQLError(`There is no job associated with this id ${id}`, {
+                extensions: {
+                    code: 'NOT_FOUND'
+                }
+            });
+        }
         const job = await Job.findByIdAndUpdate(id, {
             $set: body
         }, { new: true });
         return job;
     }
     catch (error) {
-
+        throw error;
     }
 }
 
 /**
  * Delete job by id
  * @param {String} id 
- * @returns {}
+ * @returns {id}
  */
 export const deleteJob = async (id) => {
     try {
-        const job = await Job.findByIdAndDelete(id);
-        return job;
-    } catch (error) {
+        const job = await Job.findById(id);
 
+        if (!job) {
+            throw new GraphQLError(`There is no job associated with this id ${id}`, {
+                extensions: {
+                    code: 'NOT_FOUND'
+                }
+            });
+        }
+
+        await Job.findByIdAndDelete(id);
+        return { id };
+    }
+    catch (error) {
+        throw error;
     }
 }
 
-
+/**
+ * Get job by company by id
+ * @param {String} id 
+ * @returns {[Job]}
+ */
 export const getJobsByCompany = async (id) => {
     try {
         const jobs = await Job.find({ company: id });
         return jobs;
-    } catch (error) {
-
+    }
+    catch (error) {
+        throw error;
     }
 }

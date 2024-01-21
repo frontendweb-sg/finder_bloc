@@ -4,6 +4,7 @@ type Query {
     company: Company
     companies: [Company!]
     skills: [Skill!]
+    designations: [Designation!]
 }
 
 type Mutation {
@@ -14,6 +15,15 @@ type Mutation {
     updateSkill(skill: UpdateSkill):Skill
     """ Enter id to delete skill """
     deleteSkill(id:ID!):Skill
+
+    # designation mutaiton
+    """ Create new designation """
+    createDesignation(designation: InputDesignation):Designation
+    """ Update existing designation """
+    updateDesignation(designation: UpdateDesignation):Designation
+    """ Delete designation by id """
+    deleteDesignation(id:ID!):Designation
+
 
      """Enter job to create new job"""
     createJob(job:inputJob):Job
@@ -33,13 +43,26 @@ type Mutation {
 type Skill{
     """ Skill id """
     id: ID!
-    """ Language name """
+    """ Skill name """
     title: String
-    """ Language slug name """
+    """ Skill slug name """
     slug: String
     active: Boolean
     createdAt: String
 }
+
+# designation tyupe
+type Designation{
+    """ Skill id """
+    id: ID!
+    """ Designation name """
+    title: String
+    """ Designation slug name """
+    slug: String
+    """ Designation active """
+    active: Boolean
+    createdAt: String 
+} 
 
 # jobs type
 type Job{
@@ -79,6 +102,16 @@ input InputSkill {
     title: String!
 }
 input UpdateSkill {
+    id: ID!
+    title: String!
+}
+
+# Designation input
+input InputDesignation {
+    title: String!
+}
+
+input UpdateDesignation{
     id: ID!
     title: String!
 }

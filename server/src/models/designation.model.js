@@ -1,12 +1,12 @@
 import mongoose, { Schema } from 'mongoose'
 // skills schema
 export const DESIGNATION_TABLE = "designation";
-const designationSchema = new Schema(
+const schema = new Schema(
     {
         title: { type: String, required: true },
         slug: { type: String, required: true },
         active: { type: Boolean, default: true },
-        insertAt: { type: Date, default: Date.now },
+        createdAt: { type: Date, default: Date.now },
     },
     {
         toJSON: {
