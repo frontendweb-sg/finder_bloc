@@ -24,6 +24,12 @@ type Mutation {
     """ Delete designation by id """
     deleteDesignation(id:ID!):Designation
 
+    # company mutation
+     """ Create new company """
+    createCompany(company:InputCompany):Company
+    updateCompany(company:UpdateCompany):Company
+    deleteCompany(companyId:ID!):Company
+
 
      """Enter job to create new job"""
     createJob(job:inputJob):Job
@@ -32,10 +38,7 @@ type Mutation {
     """Delete job by providing job id"""
     deleteJob(jobId:ID):Job
 
-    """Create new company"""
-    createCompany(company:inputCompany):Company
-    updateCompany(companyId:ID!,company:inputCompany):Company
-    deleteCompany(companyId:ID!):Company
+   
 }
 
 
@@ -86,8 +89,18 @@ type Company {
     id: ID!
     """Company name"""
     name: String!
+    """Company name can not be duplicate slug"""
+    slug: String
+    """Company logo"""
+    avatar: String
     """Company description"""
     description: String
+    """Company rating"""
+    rating: Float
+    """Company website"""
+    website: String
+    """Company address"""
+    address: String
     """Company activation"""
     active: Boolean
     """Company created date"""
@@ -129,12 +142,23 @@ input inputJob{
 }
  
  # Input company
-input inputCompany{
-    """Enter the company name"""
+input InputCompany{
     name: String!
-    """Enter company description"""
+    slug: String
+    avatar: String
     description: String
-    """company creaation date"""
-    createdAt: String
+    rating: Float
+    website: String
+    address: String
 }
 
+input UpdateCompany{
+    id: ID!
+    name: String!
+    slug: String
+    avatar: String
+    description: String
+    rating: Int
+    website: String
+    address: String
+}

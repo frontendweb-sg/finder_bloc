@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 import { Password } from '../utils/password.js';
 
-export const USER_TABLE = "USER";
+export const USER_TABLE = "user";
 
 const schema = new Schema({
     name: { type: String, required: true },

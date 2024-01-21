@@ -1,4 +1,4 @@
-import { addNewCompany, deleteCompanyById, getCompanies, getCompanyById, updateCompanyById } from "../controllers/company.controller.js"
+import { createCompany, deleteCompanyById, getCompanies, getCompanyById, updateCompanyById } from "../controllers/company.controller.js"
 
 export const companyQuery = {
     company: async (_, args) => await getCompanyById(args.id),
@@ -6,7 +6,7 @@ export const companyQuery = {
 }
 
 export const companyMutation = {
-    createCompany: async (_, args) => await addNewCompany(args.company),
-    updateCompany: async (_, args) => await updateCompanyById(args.companyId),
-    deleteCompany: async (_, args) => await deleteCompanyById(args.companyId),
+    createCompany: async (_, { company }) => await createCompany(company),
+    updateCompany: async (_, { company }) => await updateCompanyById(company),
+    deleteCompany: async (_, { companyId }) => await deleteCompanyById(companyId),
 }

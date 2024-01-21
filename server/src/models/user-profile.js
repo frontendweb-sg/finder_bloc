@@ -39,7 +39,7 @@ export const Experience = {
     location: { type: String, default: '' }
 }
 
-const USER_PROFILE_TABLE = "USER-PROFILE";
+const USER_PROFILE_TABLE = "user_profile";
 const schema = new Schema({
     user: { type: Schema.ObjectId, ref: USER_TABLE, },
     dob: { type: Date, default: null },
