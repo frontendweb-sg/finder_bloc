@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-export const ADDRESS_TABLE = "ADDRESS";
+export const ADDRESS_TABLE = "address";
 
 const schema = new Schema({
     isCurrent: { type: String, default: false },

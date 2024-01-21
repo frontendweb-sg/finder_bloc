@@ -44,6 +44,7 @@ const schema = new Schema({
     user: { type: Schema.ObjectId, ref: USER_TABLE, },
     dob: { type: Date, default: null },
     gender: { type: String, default: "male", enum: ["Male", "Female", "Unknown"] },
+    avatar: { type: String, default: "" },
     resume: { type: String, default: "" },
     website: { type: String, default: "" },
     about: { type: String, default: "" },
