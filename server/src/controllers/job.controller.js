@@ -84,7 +84,7 @@ export const updateJob = async (body) => {
             });
         }
         const job = await Job.findByIdAndUpdate(id, {
-            $set: body
+            $set: rest
         }, { new: true });
         return job;
     }
