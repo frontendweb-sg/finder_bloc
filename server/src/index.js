@@ -55,7 +55,7 @@ const server = new ApolloServer({ typeDefs, resolvers });
 await server.start();
 
 
-app.use('/api/graphql', apolloMiddleware(server, { context: getContext }));
+app.use('/api/graphql', apolloMiddleware(server));
 
 app.use(errorHandler);
 // listen

@@ -1,12 +1,21 @@
-type Query{
+type Query {
     job: Job
     jobs: [Job!]
     company: Company
     companies: [Company!]
+    skills: [Skill!]
 }
 
-type Mutation{
-    """Enter job to create new job"""
+type Mutation {
+    # Add, Update and Delete skill
+    """ Enter skill to create new skill """
+    createSkill(skill: InputSkill):Skill
+    """ Enter skill to update existing skill """
+    updateSkill(skill: UpdateSkill):Skill
+    """ Enter id to delete skill """
+    deleteSkill(id:ID!):Skill
+
+     """Enter job to create new job"""
     createJob(job:inputJob):Job
     """Pass id and job object to update the job"""
     updateJob(jobId:ID!,job:inputJob):Job
@@ -20,7 +29,19 @@ type Mutation{
 }
 
 
-# jobs 
+# skill type
+type Skill{
+    """ Skill id """
+    id: ID!
+    """ Language name """
+    title: String
+    """ Language slug name """
+    slug: String
+    active: Boolean
+    createdAt: String
+}
+
+# jobs type
 type Job{
     """Uniqu id"""
     id: ID!
@@ -35,7 +56,6 @@ type Job{
     """Company """
     company: Company
 }
-
 
 # companies 
 type Company {
@@ -54,6 +74,16 @@ type Company {
 }
 
 
+# Skill input
+input InputSkill {
+    title: String!
+}
+input UpdateSkill {
+    id: ID!
+    title: String!
+}
+
+# Input job
 input inputJob{
     """Enter job title"""
     title: String!
@@ -65,6 +95,7 @@ input inputJob{
     company: ID
 }
  
+ # Input company
 input inputCompany{
     """Enter the company name"""
     name: String!
@@ -73,3 +104,4 @@ input inputCompany{
     """company creaation date"""
     createdAt: String
 }
+

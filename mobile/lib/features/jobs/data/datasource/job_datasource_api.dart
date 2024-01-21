@@ -17,11 +17,11 @@ class JobDatasourceApi implements IJobDatasourceApi {
   @override
   Future<List<JobModel>> getJobs(QueryOptions<Object?> queryOptions) async {
     try {
+      print(queryOptions.document.definitions);
       final result = await _client.query(queryOptions);
-      if (result.exception!.linkException is ServerException) {
-        print(
-            'rrrrr-----${(result.exception!.linkException as ServerException).parsedResponse!.errors}');
-      }
+
+      print('rrrrr-----${(result)}');
+
       final List<dynamic> data = result.data!['jobs'];
       return data.map((e) => JobModel.fromJson(e)).toList();
     } on ServerException catch (error) {

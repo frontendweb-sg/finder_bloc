@@ -31,8 +31,11 @@ class JobBloc extends Bloc<JobEvent, JobState> {
 
   void _createJob(JobEvent event, Emitter<JobState> emit) async {
     try {
-      final result =
-          await _jobRepo.createJob(MutationOptions(document: gql('')));
+      final result = await _jobRepo.createJob(
+        MutationOptions(
+          document: gql(''),
+        ),
+      );
     } on Failure catch (error) {
       emit(JobFailed(error));
     }

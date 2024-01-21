@@ -26,7 +26,13 @@ class MyApp extends StatelessWidget {
               GetJobs(
                 QueryOptions(
                   document: gql(r'''
-
+                    query GetJobs{
+                        jobs{
+                            id
+                            title
+                            description
+                        }
+                    }
 '''),
                 ),
               ),

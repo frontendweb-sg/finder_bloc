@@ -11,8 +11,7 @@ const schema = new Schema({
     accessToken: { type: String, default: "" },
     active: { type: Boolean, default: true },
     role: { type: String, default: "user", enum: ["user", "company", "admin"] },
-    mobile: { type: String, required: true, unique: true },
-    jobs: { type: [Schema.ObjectId], default: [] }
+    mobile: { type: String, required: true, unique: true }
 }, {
     toJSON: {
         transform(doc, ret) {
@@ -33,3 +32,17 @@ schema.pre("save", function cb(done) {
 });
 
 export const User = mongoose.model(USER_TABLE, schema);
+
+
+
+/**
+ * 
+ * Company:
+ * cname, email, password, mobile, address, state, city, pincode, establishment year
+ * 
+ * User:
+ * name, email, password, mobile, address, state, city, pincode,
+ * 
+ * profile:
+ * experience, education, salary, current company, skills,
+ */

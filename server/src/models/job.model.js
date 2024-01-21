@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-const JOB_TABLE = "JOB";
+export const JOB_TABLE = "JOB";
 
 const schema = new Schema({
     title: { type: String, required: true },
