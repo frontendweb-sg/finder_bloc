@@ -133,3 +133,18 @@ export const getJobsByCompany = async (id) => {
         throw error;
     }
 }
+
+/**
+ * 
+ * @param {Sring} id 
+ * @returns 
+ */
+export const jobApply = async (id) => {
+    try {
+        const jobs = await Job.find({ company: id });
+        return jobs;
+    }
+    catch (error) {
+        throw error;
+    }
+}

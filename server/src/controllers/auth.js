@@ -5,11 +5,18 @@ import { Password } from "../utils/password.js";
 import { AuthError } from "../errors/auth-error.js";
 import { Jwt } from "../utils/jwt.js";
 
+/**
+ * User signup
+ * @param {Request} req 
+ * @param {Response} res 
+ * @param {NextFunction} next 
+ * @returns 
+ */
 export const userSingup = async (req, res, next) => {
     try {
         const newUser = new User(req.body);
         await newUser.save();
-        return res.status(201).json(newUser);
+        return res.status(201).send(newUser);
     }
     catch (error) {
         if (error instanceof MongooseError) {

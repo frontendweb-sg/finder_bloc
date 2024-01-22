@@ -1,5 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 import { Password } from '../utils/password.js';
+import { Role } from '../utils/role.js';
 
 export const USER_TABLE = "user";
 
@@ -10,7 +11,7 @@ const schema = new Schema({
     emailVerified: { type: Boolean, default: false },
     accessToken: { type: String, default: "" },
     active: { type: Boolean, default: true },
-    role: { type: String, default: "user", enum: ["user", "company", "admin"] },
+    role: { type: String, default: Role.user, enum: Role },
     mobile: { type: String, required: true, unique: true }
 }, {
     toJSON: {

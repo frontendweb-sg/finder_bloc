@@ -5,7 +5,6 @@ export class ServerError extends CustomError {
         super(message);
         this.status = status;
     }
-
     renderError() {
         return {
             message: this.message,

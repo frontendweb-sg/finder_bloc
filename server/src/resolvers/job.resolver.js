@@ -1,11 +1,18 @@
 import { getCompanyById } from "../controllers/company.controller.js"
 import { getJobs, getJob, createJob, updateJob, deleteJob } from "../controllers/job.controller.js"
 import formate from 'date-format';
+import { isUserLoggedIn } from "../middleware/auth.js";
 
 
 export const jobQuery = {
-    job: async (_, args) => await getJob(args.jobId),
-    jobs: async (_, args, context) => await getJobs(),
+    job: async (_, args, { req, res }) => {
+        await isUserLoggedIn(req, res);
+        return await getJob(args.jobId);
+    },
+    jobs: async (_, args, { req, res }) => {
+        await isUserLoggedIn(req, res);
+        return await getJobs();
+    },
 }
 
 export const JobFieldResolve = {
