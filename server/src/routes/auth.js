@@ -33,8 +33,9 @@ route.post("/signup", [
 
 
 route.post("/", [
-    body("email", "Email/mobile is required!").isEmail().notEmpty()
+    body("email", "Email/mobile is required!").notEmpty().isEmail().withMessage("Invalid email!")
         .custom(async (value) => {
+
             const user = await User.findOne({
                 $or: [
                     { email: value },

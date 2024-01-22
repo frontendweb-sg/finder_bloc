@@ -19,7 +19,7 @@ class JobBloc extends Bloc<JobEvent, JobState> {
       QueryOptions options = event.options;
 
       emit(JobsLoading());
-      final response = await GetJobUseCase(_jobRepo).call(params: options);
+      final response = await GetJobUseCase(_jobRepo).call(options);
       response.fold(
         (Failure l) => emit(JobFailed(l)),
         (List<JobEntity> r) => emit(JobsSuccess(r)),

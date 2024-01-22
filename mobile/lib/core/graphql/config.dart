@@ -3,7 +3,6 @@ import 'package:mobile/core/constants/constants.dart';
 
 class GraphQlConfig {
   static HttpLink httpLink = HttpLink(AppConstants.graphQLBaseUrl);
-
   GraphQLClient init() {
     return GraphQLClient(
       link: httpLink,

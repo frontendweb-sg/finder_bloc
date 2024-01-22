@@ -1,7 +1,4 @@
-import 'package:dartz/dartz.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:mobile/core/typedef/typedef.dart';
-import 'package:mobile/features/jobs/business/entities/job_entity.dart';
 import 'package:mobile/features/jobs/data/models/job_model.dart';
 
 abstract class IJobDatasourceApi {
@@ -17,7 +14,6 @@ class JobDatasourceApi implements IJobDatasourceApi {
   @override
   Future<List<JobModel>> getJobs(QueryOptions<Object?> queryOptions) async {
     try {
-      print(queryOptions.document.definitions);
       final result = await _client.query(queryOptions);
 
       print('rrrrr-----${(result)}');

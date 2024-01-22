@@ -1,5 +1,6 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:mobile/core/typedef/typedef.dart';
+import 'package:mobile/core/utils/typedef.dart';
+
 import 'package:mobile/features/jobs/business/entities/job_entity.dart';
 
 ///

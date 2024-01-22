@@ -1,5 +1,5 @@
-import 'package:mobile/core/typedef/typedef.dart';
+import 'package:mobile/core/utils/typedef.dart';
 
 abstract class UseCase<Type, Params> {
-  FutureResult<Type> call({Params params});
+  FutureResult<Type> call(Params params);
 }

@@ -61,4 +61,22 @@ class MockJobRepo extends _i1.Mock implements _i3.JobRepo {
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, List<_i6.JobEntity>>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, _i6.JobEntity>> createJob(
+          _i7.MutationOptions<Object?>? mutationOptions) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createJob,
+          [mutationOptions],
+        ),
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.JobEntity>>.value(
+            _FakeEither_0<_i5.Failure, _i6.JobEntity>(
+          this,
+          Invocation.method(
+            #createJob,
+            [mutationOptions],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.JobEntity>>);
 }

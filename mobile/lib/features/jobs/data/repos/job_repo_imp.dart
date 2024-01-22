@@ -1,8 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:graphql/src/core/query_options.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mobile/core/errors/failure.dart';
-import 'package:mobile/core/typedef/typedef.dart';
+import 'package:mobile/core/utils/typedef.dart';
 import 'package:mobile/features/jobs/business/entities/job_entity.dart';
 import 'package:mobile/features/jobs/business/repos/job_repo.dart';
 import 'package:mobile/features/jobs/data/datasource/job_datasource_api.dart';
