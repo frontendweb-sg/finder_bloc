@@ -1,18 +1,11 @@
+import formate from 'date-format';
 import { getCompanyById } from "../controllers/company.controller.js"
 import { getJobs, getJob, createJob, updateJob, deleteJob } from "../controllers/job.controller.js"
-import formate from 'date-format';
-import { isUserLoggedIn } from "../middleware/auth.js";
-
+import { isCompanyLoggedIn } from '../middleware/auth.js';
 
 export const jobQuery = {
-    job: async (_, args, { req, res }) => {
-        await isUserLoggedIn(req, res);
-        return await getJob(args.jobId);
-    },
-    jobs: async (_, args, { req, res }) => {
-        await isUserLoggedIn(req, res);
-        return await getJobs();
-    },
+    job: async (_, args) => await getJob(args.jobId),
+    jobs: async (_, args) => await getJobs(),
 }
 
 export const JobFieldResolve = {
@@ -21,7 +14,16 @@ export const JobFieldResolve = {
 }
 
 export const jobMutation = {
-    createJob: async (_, { job }) => await createJob(job),
-    updateJob: async (_, { job }) => await updateJob(job),
-    deleteJob: async (_, { jobId }) => await deleteJob(jobId),
+    createJob: async (_, { job }) => {
+        await isCompanyLoggedIn();
+        return await createJob(job)
+    },
+    updateJob: async (_, { job }) => {
+        await isCompanyLoggedIn();
+        return await updateJob(job)
+    },
+    deleteJob: async (_, { jobId }) => {
+        await isCompanyLoggedIn();
+        return await deleteJob(jobId);
+    },
 } 

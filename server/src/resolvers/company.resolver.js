@@ -11,6 +11,12 @@ export const companyMutation = {
         await isCompanyLoggedIn(req, res);
         return await createCompany(company);
     },
-    updateCompany: async (_, { company }) => await updateCompanyById(company),
-    deleteCompany: async (_, { companyId }) => await deleteCompanyById(companyId),
+    updateCompany: async (_, { company }) => {
+        await isCompanyLoggedIn(req, res);
+        return await updateCompanyById(company);
+    },
+    deleteCompany: async (_, { companyId }) => {
+        await isCompanyLoggedIn(req, res);
+        return await deleteCompanyById(companyId)
+    },
 }

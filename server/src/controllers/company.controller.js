@@ -50,7 +50,8 @@ export const createCompany = async (body) => {
 }
 
 /**
- * 
+ * Update company
+ * @constructor
  * @param {{String id, String title}} body 
  * @returns {Company}
  */

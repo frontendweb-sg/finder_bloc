@@ -1,3 +1,4 @@
+import { GraphQLError } from "graphql";
 import { CustomError } from "./custom-error.js";
 
 export class AuthError extends CustomError {
@@ -13,3 +14,9 @@ export class AuthError extends CustomError {
         }
     }
 }
+
+export const authGraphQLError = (msg = "Unauthorized access") => new GraphQLError(msg, {
+    extensions: {
+        code: 'UNAUTHORIZED_ACCESS',
+    }
+})

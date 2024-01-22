@@ -1,4 +1,5 @@
 import { getSkills, deleteSkill, addSkill, updateSkill } from "../controllers/skill.controller.js"
+import { authGraphQLError } from "../errors/auth-error.js";
 import { isAdminLoggedIn } from "../middleware/auth.js";
 
 export const skillQuery = {
