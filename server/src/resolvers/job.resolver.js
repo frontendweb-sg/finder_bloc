@@ -14,16 +14,17 @@ export const JobFieldResolve = {
 }
 
 export const jobMutation = {
-    createJob: async (_, { job }) => {
-        await isCompanyLoggedIn();
+    createJob: async (_, { job }, { req, res }) => {
+        console.log(job);
+        await isCompanyLoggedIn(req, res);
         return await createJob(job)
     },
-    updateJob: async (_, { job }) => {
-        await isCompanyLoggedIn();
+    updateJob: async (_, { job }, { req, res }) => {
+        await isCompanyLoggedIn(req, res);
         return await updateJob(job)
     },
-    deleteJob: async (_, { jobId }) => {
-        await isCompanyLoggedIn();
+    deleteJob: async (_, { jobId }, { req, res }) => {
+        await isCompanyLoggedIn(req, res);
         return await deleteJob(jobId);
     },
 } 

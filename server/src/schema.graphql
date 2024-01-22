@@ -144,7 +144,7 @@ input UpdateDesignation{
 # Input job
 input InputJob{
     """Enter company id"""
-    company: String!
+    company: ID!
     """Enter job title"""
     title: String!
     """Enter job description"""

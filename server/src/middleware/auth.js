@@ -11,6 +11,7 @@ import { Role } from "../utils/role.js";
  * @returns {User}
  */
 export const userIsLoggedin = async (req, res) => {
+
     const header = req.get('Authorization');
     if (!header) throw authGraphQLError();
 
@@ -21,7 +22,7 @@ export const userIsLoggedin = async (req, res) => {
     if (!verify) throw authGraphQLError("Token expired");
 
     const user = await User.findById(verify.id);
-    if (!user) authGraphQLError();
+    if (!user) throw authGraphQLError();
     return user;
 }
 
@@ -37,7 +38,7 @@ export const isCompanyLoggedIn = async (req, res) => {
     try {
         const user = await userIsLoggedin(req, res);
         if ([Role.company, Role.admin].includes(user.role)) return true;
-        throw authGraphQLError("You have no admin rights!");
+        throw authGraphQLError("You have no access rights!");
     } catch (error) {
         throw error;
     }

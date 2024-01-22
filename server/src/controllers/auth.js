@@ -54,6 +54,9 @@ export const userSignin = async (req, res, next) => {
         });
     }
     catch (error) {
-        console.log(error);
+        if (error instanceof MongooseError) {
+            error = new BadRequestError(error.message);
+        }
+        next(error);
     }
 }
