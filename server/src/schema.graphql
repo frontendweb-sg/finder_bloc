@@ -14,7 +14,7 @@ type Mutation {
     """ Enter skill to update existing skill """
     updateSkill(skill: UpdateSkill):Skill
     """ Enter id to delete skill """
-    deleteSkill(id:ID!):Skill
+    deleteSkill(skillId:ID!):Skill
 
     # designation mutaiton
     """ Create new designation """
@@ -22,7 +22,7 @@ type Mutation {
     """ Update existing designation """
     updateDesignation(designation: UpdateDesignation):Designation
     """ Delete designation by id """
-    deleteDesignation(id:ID!):Designation
+    deleteDesignation(designationId:ID!):Designation
 
     # company mutation
      """ Create new company """

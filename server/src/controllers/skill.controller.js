@@ -19,8 +19,9 @@ export const getSkills = async (queryParam = {}) => {
 }
 
 /**
- * 
- * @param {Object} body 
+ * Add new skill
+ * @constructor
+ * @param {{ String title }} body 
  * @returns {Skill}
  */
 export const addSkill = async (body) => {

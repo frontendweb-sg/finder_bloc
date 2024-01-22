@@ -1,12 +1,24 @@
 import { getSkills, deleteSkill, addSkill, updateSkill } from "../controllers/skill.controller.js"
+import { isAdminLoggedIn } from "../middleware/auth.js";
 
 export const skillQuery = {
-    skills: async (_, args) => await getSkills(),
+    skills: async () => await getSkills(),
 }
 
 export const skillMutation = {
-    // skills mutation
-    createSkill: async (_, { skill }) => addSkill(skill),
-    updateSkill: async (_, { skill }) => updateSkill(skill),
-    deleteSkill: async (_, { id }) => deleteSkill(id)
+    // create new skill
+    createSkill: async (_, { skill }, { req, res }) => {
+        await isAdminLoggedIn(req, res);
+        return await addSkill(skill);
+    },
+    // update existing skill
+    updateSkill: async (_, { skill }) => {
+        await isAdminLoggedIn(req, res);
+        return await updateSkill(skill);
+    },
+    // delete skill by skill id
+    deleteSkill: async (_, { skillId }) => {
+        await isAdminLoggedIn(req, res);
+        return deleteSkill(skillId);
+    }
 }

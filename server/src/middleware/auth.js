@@ -15,7 +15,9 @@ const authCommon = async (req, res) => {
     const header = req.get('Authorization');
 
     // check header present
-    if (!header) throw new AuthError("Unauthorized access!");
+    if (!header) throw new GraphQLError("Unauthorized access!", {
+        extensions: { code: 'UNAUTHORIZED_ACCESS' }
+    });
 
     // extract token from header
     const token = header.split(' ')[1];
@@ -58,6 +60,7 @@ export const auth = async (req, res, next) => {
 
 /**
  * 
+ * @constructor
  * @param {Request} req 
  * @param {Response} res 
  * @returns {Boolean}
@@ -125,9 +128,16 @@ export const isAdminLoggedIn = async (req, res) => {
             }
         )
         if (user.role === Role.admin) {
+            console.log(user.role, 'role')
             return true;
+
         }
-        return false;
+
+        throw new GraphQLError(
+            'Unauthorized Access, only admin has permission',
+            {
+                extensions: { code: 'RESTRCTED_PERMISSION' }
+            });
     }
     catch (error) {
         throw error;

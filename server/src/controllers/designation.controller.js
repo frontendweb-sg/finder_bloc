@@ -18,6 +18,7 @@ export const getDesignations = async (queryParam = {}) => {
 
 /**
  * Add designation
+ * @constructor
  * @param {Object} body 
  * @returns {Designation}
  */
@@ -35,14 +36,14 @@ export const addDesignation = async (body) => {
 
 /**
  * Update designation
+ * @constructor
  * @param {Object} body 
- * @returns 
+ * @returns {Designation}
  */
 export const updateDesignation = async (body) => {
     try {
         const { id, ...rest } = body;
         const hasDesignation = await Designation.findById(id);
-
         if (!hasDesignation) {
             throw new GraphQLError(`There is no designation associated with this id ${id}`, {
                 extensions: {
@@ -50,12 +51,10 @@ export const updateDesignation = async (body) => {
                 }
             });
         }
-
         rest.slug = rest.title.replace(/\s+/g, '-').toLowerCase();
         const designation = await Designation.findByIdAndUpdate(id, {
             $set: rest
         }, { new: true });
-
         return designation;
     }
     catch (error) {
@@ -64,9 +63,10 @@ export const updateDesignation = async (body) => {
 }
 
 /**
- * 
- * @param {String} id 
- * @returns {id}
+ * Delete skill
+ * @constructor
+ * @param {String} id - skillId 
+ * @returns {{String skillId}}
  */
 export const deleteDesignation = async (id) => {
     try {
@@ -81,7 +81,7 @@ export const deleteDesignation = async (id) => {
         }
 
         await Designation.findByIdAndDelete(id);
-        return { id };
+        return { skillId: id };
     }
     catch (error) {
         throw error;
