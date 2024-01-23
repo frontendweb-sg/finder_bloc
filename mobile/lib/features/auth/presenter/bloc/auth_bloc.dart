@@ -20,15 +20,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   void _authLogin(AuthLogin event, Emitter<AuthState> emit) async {
     try {
       emit(AuthLoading());
-      print('event ${event.login}');
       MapData login = event.login;
-
-      final result = await _authRepo.login(login);
+      final result = await LoginUseCase(_authRepo).call(
+        LoginParam(
+          email: login['email'],
+          password: login['password'],
+        ),
+      );
       result.fold(
         (Failure error) => emit(AuthFailed(error)),
         (UserEntity data) => emit(AuthLoginSuccess(data)),
       );
-      debugPrint('state----- $state');
     } on Failure catch (error) {
       emit(AuthFailed(error));
     }

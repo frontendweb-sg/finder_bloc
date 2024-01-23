@@ -1,7 +1,8 @@
 import 'package:equatable/equatable.dart';
 
 ///
-/// Auth response entity
+/// User entity
+///
 class UserEntity extends Equatable {
   final String? id;
   final String? name;
@@ -10,7 +11,7 @@ class UserEntity extends Equatable {
   final String? accessToken;
   final bool? active;
   final bool? emailVerified;
-  final bool? role;
+  final String? role;
   final int? expireIn;
 
   const UserEntity({

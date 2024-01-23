@@ -18,9 +18,12 @@ class AuthRepoImp implements AuthRepo {
   @override
   FutureResult<UserEntity> login(MapData param) async {
     try {
-      print('repo $param');
+      print('param $param');
       final httpRespose = await _api.login(param);
 
+      if (httpRespose.response.statusCode == 400) {
+        return Left(httpRespose.response.data['errors'][0]);
+      }
       if (httpRespose.response.statusCode == HttpStatus.ok) {
         return Right(httpRespose.data);
       }

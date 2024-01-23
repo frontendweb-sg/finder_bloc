@@ -15,7 +15,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       active: json['active'] as bool?,
       emailVerified: json['emailVerified'] as bool?,
       expireIn: json['expireIn'] as int?,
-      role: json['role'] as bool?,
+      role: json['role'] as String?,
     );
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{

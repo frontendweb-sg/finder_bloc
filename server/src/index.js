@@ -27,7 +27,6 @@ app.use(cors());
 app.use("/api/auth", authRoute);
 
 const getContext = ({ req, res }) => ({ req, res });
-
 // apollo server
 const server = new ApolloServer({ typeDefs, resolvers });
 await server.start();

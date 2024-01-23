@@ -10,9 +10,13 @@ part 'auth_datasource_api.g.dart';
 abstract class AuthDatasourceApi {
   factory AuthDatasourceApi(Dio dio) = _AuthDatasourceApi;
 
+  ///
+  /// Login handler
   @POST(AppConstants.loginUrl)
-  Future<HttpResponse<UserModel>> login(MapData payload);
+  Future<HttpResponse<UserModel>> login(@Body() MapData payload);
 
+  ///
+  /// Register handler
   @POST(AppConstants.registerUrl)
-  Future<HttpResponse<void>> register(MapData payload);
+  Future<HttpResponse<void>> register(@Body() MapData payload);
 }
